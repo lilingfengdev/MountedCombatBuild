@@ -1,0 +1,11 @@
+name: MountedCombat
+version: 2.1
+main: me.nukeghost.MountedCombat
+api-version: 1.16
+prefix: M Combat
+authors: [ NukeGH05T ]
+description: A plugin to make mounted combat more fun.
+commands:
+  mcreload:
+    aliases: [mcr]
+    description: Reloads config.

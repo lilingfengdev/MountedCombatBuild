@@ -1,0 +1,118 @@
+#You can name modules however you like.
+#As long as the module's name is listed in the 'active-modules'
+#   it will be activated.
+active-modules:
+  - horseModule
+  - pigModule
+
+#It's module that controls horse mount effects
+#The name can be anything like myHorse or something else
+horseModule:
+  #Which vehicle/mount/entity should it affect
+  #Make sure the version of Minecraft you are using has that Entity :)
+  #Possible mounts: Boat, Camel, ChestBoat, Strider, TraderLlama, ZombieHorse
+  #   Donkey, Horse, Llama, Minecart, Mule, Pig, SkeletonHorse
+  mount: HORSE
+  #Rider section: Everything here affects the player riding the mount
+  rider:
+    #Active effects. Only gets called when attacking another Entity (All entities)
+    active:
+      multipliers:
+        #Damage multiplier. It literally multiplies the damage dealt by a random amount between the min and max
+        damage: #Minimum 1x & Maximum 3x damage multiply
+          min: 1.0
+          max: 3.0
+      #This section applies various potion effectsto the rider.
+      effects:
+        #Effect number. It can go from 1 to a very big number. This MUST be a whole number (1, 2, 3, 4 ...)
+        1:
+          #Must match potion effect from here -> https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/potion/PotionEffectType.html
+          effect: DAMAGE_RESISTANCE #Potion effect to apply
+          chance: 60 #Chance of this effect triggering
+          duration: 60 #Measured in ticks (1 Second = 20 ticks)
+          amplification: 20 #Amplifier for the potion effect (0 to 255)
+        2:
+          effect: INCREASE_DAMAGE
+          chance: 50
+          duration: 20
+          amplification: 20
+        #You can add more effects under this one or remove the 2nd one and have just 1 effect. Fully depends on you.
+  #Effects in this section are applied to the Player (not all entities) that was attacked
+  enemy: #Only triggers the enemy part if the enemy is a Player
+    effects:
+      #Effect number. It can go from 1 to a very big number. This MUST be a whole number (1, 2, 3, 4 ...)
+      1:
+        #Must match potion effect from here -> https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/potion/PotionEffectType.html
+        effect: BLINDNESS #Potion effect to apply
+        chance: 30 #Chance of this effect triggering
+        duration: 20 #Measured in ticks (1 Second = 20 ticks)
+        amplification: 60 #Amplifier for the potion effect (0 to 255)
+      2:
+        effect: WEAKNESS
+        chance: 10
+        duration: 60
+        amplification: 50
+
+pigModule:
+  mount: PIG
+  rider:
+    active:
+      multipliers:
+        damage:
+          min: 0.3
+          max: 1.2
+      effects:
+        1:
+          effect: ABSORPTION
+          chance: 40
+          duration: 60 #Measured in ticks (1 Second = 20 ticks)
+          amplification: 60
+        2:
+          effect: SLOW
+          chance: 30
+          duration: 40
+          amplification: 20
+  enemy: #Only triggers the enemy part if the enemy is a Player
+    effects:
+      1:
+        effect: BLINDNESS
+        chance: 30
+        duration: 20 #Measured in ticks (1 Second = 20 ticks)
+        amplification: 60
+      2:
+        effect: HUNGER
+        chance: 35
+        duration: 60
+        amplification: 50
+
+inactiveModule: #This module is inactive because, it's not in the 'active-modules' list
+  mount: STRIDER
+  rider:
+    active:
+      multipliers:
+        damage:
+          min: 1
+          max: 1.5
+      effects:
+        1:
+          effect: FIRE_RESISTANCE
+          chance: 40
+          duration: 80 #Measured in ticks (1 Second = 20 ticks)
+          amplification: 60
+        2:
+          effect: SATURATION
+          chance: 50
+          duration: 40
+          amplification: 20
+  enemy: #Only triggers the enemy part if the enemy is a Player
+    effects:
+      1:
+        effect: BLINDNESS
+        chance: 30
+        duration: 20 #Measured in ticks (1 Second = 20 ticks)
+        amplification: 60
+      2:
+        effect: HUNGER
+        chance: 35
+        duration: 60
+        amplification: 50
