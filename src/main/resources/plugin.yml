@@ -1,5 +1,5 @@
 name: MountedCombat
-version: 2.1
+version: 2.2
 main: me.nukeghost.MountedCombat
 api-version: 1.16
 prefix: M Combat
@@ -9,3 +9,8 @@ commands:
   mcreload:
     aliases: [mcr]
     description: Reloads config.
+permissions:
+  mountedcombat.active:
+    default: true
+  mountedcombat.passive:
+    default: true

@@ -1,6 +1,7 @@
 #You can name modules however you like.
 #As long as the module's name is listed in the 'active-modules'
 #   it will be activated.
+passive-delay: 60 #In ticks (1 second = 20 ticks)
 active-modules:
   - horseModule
   - pigModule
@@ -35,6 +36,19 @@ horseModule:
           effect: INCREASE_DAMAGE
           chance: 50
           duration: 20
+          amplification: 20
+    #Passive effects. Gets called repeatedly after each configured delay
+    passive:
+      effects:
+        #Effect number. It can go from 1 to a very big number. This MUST be a whole number (1, 2, 3, 4 ...)
+        1:
+          #Must match potion effect from here -> https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/potion/PotionEffectType.html
+          effect: SPEED #Potion effect to apply
+          chance: 100 #Chance of this effect triggering
+          amplification: 20 #Amplifier for the potion effect (0 to 255)
+        2:
+          effect: HEALTH_BOOST
+          chance: 50
           amplification: 20
         #You can add more effects under this one or remove the 2nd one and have just 1 effect. Fully depends on you.
   #Effects in this section are applied to the Player (not all entities) that was attacked
@@ -72,6 +86,17 @@ pigModule:
           chance: 30
           duration: 40
           amplification: 20
+    passive:
+      effects:
+        1:
+          #Must match potion effect from here -> https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/potion/PotionEffectType.html
+          effect: ABSORPTION
+          chance: 100
+          amplification: 20
+        2:
+          effect: HEALTH_BOOST
+          chance: 50
+          amplification: 10
   enemy: #Only triggers the enemy part if the enemy is a Player
     effects:
       1:
@@ -104,6 +129,17 @@ inactiveModule: #This module is inactive because, it's not in the 'active-module
           chance: 50
           duration: 40
           amplification: 20
+    passive:
+      effects:
+        1:
+          #Must match potion effect from here -> https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/potion/PotionEffectType.html
+          effect: BLINDNESS
+          chance: 20
+          amplification: 20
+        2:
+          effect: HUNGER
+          chance: 50
+          amplification: 10
   enemy: #Only triggers the enemy part if the enemy is a Player
     effects:
       1:

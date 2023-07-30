@@ -9,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffectType;
 
 public class ModuleHandler {
-    public static void runModule(Player p, String moduleName, EntityDamageByEntityEvent event) {
+    public static void runModuleActive(Player p, String moduleName, EntityDamageByEntityEvent event) {
         FileConfiguration config = DataUtils.config;
         //Rider
         String riderActiveSection = moduleName + ".rider.active";
@@ -50,6 +50,25 @@ public class ModuleHandler {
                                 config.getString(pathE + "." + section + ".effect")),
                         config.getInt(pathE + "." + section + ".duration"),
                         config.getInt(pathE + "." + section + ".amplification"));
+            }
+        }
+    }
+
+    public static void runModulePassive(Player p, String moduleName) {
+        FileConfiguration config = DataUtils.config;
+        //Rider
+        String riderPassiveSection = moduleName + ".rider.passive";
+
+        String path = riderPassiveSection + ".effects";
+        for (String section : config.getConfigurationSection(path).getKeys(false)){
+
+            int min = 0; int max = 100;
+            boolean chanced = Math.random()*(max-min+1)+min <= config.getDouble(path +"."+section +".chance");
+            if (chanced){
+                PotionEffects.applyPotion(p, PotionEffectType.getByName(
+                                config.getString(path + "." + section + ".effect")),
+                        config.getInt("passive-delay"),
+                        config.getInt(path + "." + section + ".amplification"));
             }
         }
     }

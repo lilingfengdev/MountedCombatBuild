@@ -12,13 +12,14 @@ public class PlayerAttackListener implements Listener {
     public void onPlayerAttackMounted(EntityDamageByEntityEvent e) {
         if (!(e.getDamager() instanceof Player)) return;
         Player rider = (Player) e.getDamager();
+        if (!rider.hasPermission("mountedcombat.active")) return;
         if (!rider.isInsideVehicle()) return;
         if (!DataUtils.hasEntityModule(rider.getVehicle().getType())) return;
         //We got a module for specified mount
         String module = DataUtils.getModuleName(rider.getVehicle().getType());
 
         //Run Rider Logic
-        ModuleHandler.runModule(rider, module, e);
+        ModuleHandler.runModuleActive(rider, module, e);
 
         //Run Enemy Logic
     }
